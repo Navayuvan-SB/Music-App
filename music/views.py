@@ -31,3 +31,7 @@ class GenreDetailView(generic.DetailView):
 class LabelListView(generic.ListView):
     model = Label
 
+
+class LabelDetailView(generic.DetailView):
+    model = Label
+
