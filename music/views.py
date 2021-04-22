@@ -6,3 +6,7 @@ from .models import Music
 
 class MusicListView(generic.ListView):
     model = Music
+
+
+class MusicDetailView(generic.DetailView):
+    model = Music
