@@ -12,5 +12,6 @@ urlpatterns = [
     path('labels/<slug:slug>', views.LabelDetailView.as_view(), name="label-detail"),
     path('music-directors/', views.MusicDirectorListView.as_view(),
          name="music-directors"),
-    
+    path('music-directors/<slug:slug>',
+         views.MusicDirectorDetailView.as_view(), name="music-director-detail"),
 ]
