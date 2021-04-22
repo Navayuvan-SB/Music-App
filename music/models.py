@@ -14,3 +14,11 @@ class MusicDirector(models.Model):
     date_of_birth = models.DateField()
     phone_number = models.CharField(max_length=13)
     slug = models.SlugField("URL param", default=None, null=True)
+
+
+class Genre(models.Model):
+    title = models.CharField(max_length=100, verbose_name="Genre Name")
+    slug = models.SlugField(verbose_name="URL Param")
+
+    def __str__(self):
+        return self.title
