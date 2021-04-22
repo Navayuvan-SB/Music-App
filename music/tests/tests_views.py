@@ -419,3 +419,33 @@ class LabelsDetailViewTest(TestCase):
         )
         self.assertContains(response, "Label 1")
 
+
+class MusicDirectorListViewTest(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        number_of_music_directors = 10
+        for music_director_id in range(number_of_music_directors):
+            music_director = MusicDirector.objects.create(
+                name=f"Music Director {music_director_id}",
+                website="https://google.co.in",
+                date_of_birth="1980-06-11",
+                phone_number="9897927297"
+            )
+
+    def test_view_url_exists_at_desired_location(self):
+        response = self.client.get("/musics/music-directors/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_url_accessible_by_name(self):
+        response = self.client.get(reverse("music-directors"))
+        self.assertEqual(response.status_code, 200)
+
+    def test_view_uses_correct_template(self):
+        response = self.client.get(reverse("music-directors"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "music/musicdirector_list.html")
+
+    def test_view_render_all_movies(self):
+        response = self.client.get(reverse("music-directors"))
+        self.assertEqual(len(response.context["musicdirector_list"]), 10)
