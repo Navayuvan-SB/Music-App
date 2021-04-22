@@ -5,7 +5,7 @@ class Label(models.Model):
     name = models.CharField(max_length=200, verbose_name="Label Company Name")
     founded_date = models.DateField(verbose_name="Founded Date")
     headquarters = models.CharField(max_length=512, verbose_name="Location of Headquarters")
-
+    slug = models.SlugField("URL param", default=None, null=True)
 
 class MusicDirector(models.Model):
 
@@ -13,5 +13,4 @@ class MusicDirector(models.Model):
     website = models.URLField()
     date_of_birth = models.DateField()
     phone_number = models.CharField(max_length=13)
-
-
+    slug = models.SlugField("URL param", default=None, null=True)
