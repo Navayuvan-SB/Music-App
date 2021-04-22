@@ -196,7 +196,6 @@ class AlbumListViewTest(TestCase):
         self.assertEqual(len(response.context["album_list"]), 10)
 
 
-
 class AlbumDetailViewTest(TestCase):
 
     @classmethod
@@ -236,7 +235,6 @@ class AlbumDetailViewTest(TestCase):
             album.genre.set(genres)
             album.save()
 
-
     def test_view_url_exists_at_desired_location(self):
         response = self.client.get("/musics/albums/album-1")
         self.assertEqual(response.status_code, 200)
@@ -259,8 +257,6 @@ class AlbumDetailViewTest(TestCase):
             reverse("album-detail", kwargs={"slug": "album-1"})
         )
         self.assertContains(response, "Album Name 1")
-
-
 
 
 class GenreListViewTest(TestCase):
@@ -288,7 +284,6 @@ class GenreListViewTest(TestCase):
             )
         genres = Genre.objects.all()
 
-        
     def test_view_url_exists_at_desired_location(self):
         response = self.client.get("/musics/genres/")
         self.assertEqual(response.status_code, 200)
@@ -355,4 +350,34 @@ class GenreDetailViewTest(TestCase):
             reverse("genre-detail", kwargs={"slug": "genre-1"})
         )
         self.assertContains(response, "Genre 1")
+
+
+class LabelListViewTest(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        number_of_labels = 10
+        for label_id in range(number_of_labels):
+            label = Label.objects.create(
+                name=f"Label {label_id}",
+                founded_date="1989-03-12",
+                headquarters="USA"
+            )
+
+    def test_view_url_exists_at_desired_location(self):
+        response = self.client.get("/musics/labels/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_url_accessible_by_name(self):
+        response = self.client.get(reverse("labels"))
+        self.assertEqual(response.status_code, 200)
+
+    def test_view_uses_correct_template(self):
+        response = self.client.get(reverse("labels"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "music/label_list.html")
+
+    def test_view_render_all_movies(self):
+        response = self.client.get(reverse("labels"))
+        self.assertEqual(len(response.context["label_list"]), 10)
 
