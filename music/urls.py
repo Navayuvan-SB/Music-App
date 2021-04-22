@@ -7,4 +7,5 @@ urlpatterns = [
     path('albums/', views.AlbumListView.as_view(), name="albums"),
     path('albums/<slug:slug>', views.AlbumDetailView.as_view(), name="album-detail"),
     path('genres/', views.GenreListView.as_view(), name="genres"),
+    path('genres/<slug:slug>', views.GenreDetailView.as_view(), name="genre-detail"),
 ]
