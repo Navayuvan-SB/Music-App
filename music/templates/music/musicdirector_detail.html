@@ -2,17 +2,78 @@
 
 {% block title %} {{musicdirector.name}} 
 {% endblock title %} 
-
 {% block content %}
 
 <div class="row">
+  <div class="col-md-5">
+    <h1 class="mt-3 text-end title-color fw-bold">{{musicdirector.name|title}}</h1>
+    <p class="mt-3 text-end">
+      Albums <span class="fw-bold">{{musicdirector.album_set.count}}</span>
+    </p>
+  </div>
 
-    <div class="col-md-12">
-
-        {{musicdirector.name}}
-
+  <div class="col-md-7 px-5 mb-4">
+    <div class="mt-4">
+      <h4>Info</h4>
+      <div class="badge rounded-pill bg-dark">
+        <p class="mb-0 fs-6 px-2 py-1">DOB: {{musicdirector.date_of_birth}}</p>
+      </div>
+      <div class="badge rounded-pill bg-dark">
+        <a href="{{ musicdirector.website }}" class="no-text-decoration text-white"
+          ><p class="mb-0 fs-6 px-2 py-1">Website</p></a
+        >
+      </div>
     </div>
 
+    <div class="mt-4">
+      <h4>Albums</h4>
+
+      <div class="row">
+        {% for album in musicdirector.album_set.all %}
+
+        <div class="col-md-12 p-3">
+          <div class="d-flex align-items-center justify-content-start">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="22px"
+              viewBox="0 0 24 24"
+              width="22px"
+              fill="#000000"
+              class="fill-blue"
+            >
+              <path d="M0 0h24v24H0V0z" fill="none" />
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-12.5c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5 4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5zm0 5.5c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"
+              />
+            </svg>
+            <a
+              href="{% url 'album-detail' album.slug %}"
+              class="no-text-decoration text-black"
+            >
+              <p class="mb-0 mx-1">
+                <span class="fw-bold">{{album.name}}</span>
+              </p>
+            </a>
+          </div>
+          <div class="d-flex align-items-center justify-content-start my-2">
+            {% for genre in album.genre.all %}
+            <div class="badge rounded-pill bg-primary">
+              <a
+                href="{% url 'genre-detail' genre.slug %}"
+                class="no-text-decoration text-white"
+                ><p class="mb-0 fs-7 px-2 py-1">{{genre.title|title}}</p></a
+              >
+            </div>
+            {% endfor %}
+          </div>
+
+          <hr />
+        </div>
+
+        {% endfor %}
+      </div>
+    </div>
+  </div>
 </div>
 
 {% endblock content %}
