@@ -41,7 +41,7 @@ class Album(models.Model):
     music_director = models.ForeignKey(
         MusicDirector, on_delete=models.SET_NULL, null=True)
     label = models.ForeignKey(Label, on_delete=models.SET_NULL, null=True)
-    genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True)
+    genre = models.ManyToManyField(Genre)
 
     asin = models.CharField(
         max_length=10, verbose_name="Amazon Standard Indentification Number")
@@ -61,7 +61,7 @@ class Music(models.Model):
 
     music_director = models.ForeignKey(
         MusicDirector, on_delete=models.SET_NULL, null=True)
-    genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True)
+    genre = models.ManyToManyField(Genre)
     album = models.ForeignKey(Album, on_delete=models.SET_NULL, null=True)
 
     slug = models.SlugField("URL param")
