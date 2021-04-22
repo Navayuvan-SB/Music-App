@@ -381,3 +381,41 @@ class LabelListViewTest(TestCase):
         response = self.client.get(reverse("labels"))
         self.assertEqual(len(response.context["label_list"]), 10)
 
+
+class LabelsDetailViewTest(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+
+        number_of_labels = 2
+        for label_id in range(number_of_labels):
+            label = Label.objects.create(
+                name=f"Label {label_id}",
+                founded_date="1989-03-12",
+                headquarters="USA",
+                slug=f"label-{label_id}"
+            )
+
+    def test_view_url_exists_at_desired_location(self):
+        response = self.client.get("/musics/labels/label-1")
+        self.assertEqual(response.status_code, 200)
+
+    def test_url_accessible_by_name(self):
+        response = self.client.get(
+            reverse("label-detail", kwargs={"slug": "label-1"})
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_view_uses_correct_template(self):
+        response = self.client.get(
+            reverse("label-detail", kwargs={"slug": "label-1"})
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "music/label_detail.html")
+
+    def test_view_displays_correct_movie(self):
+        response = self.client.get(
+            reverse("label-detail", kwargs={"slug": "label-1"})
+        )
+        self.assertContains(response, "Label 1")
+
