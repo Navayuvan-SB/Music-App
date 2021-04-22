@@ -306,3 +306,53 @@ class GenreListViewTest(TestCase):
         response = self.client.get(reverse("genres"))
         self.assertEqual(len(response.context["genre_list"]), 10)
 
+
+class GenreDetailViewTest(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+
+        music_director = MusicDirector.objects.create(
+            name="Sam Henry",
+            website="https://google.co.in",
+            date_of_birth="1980-06-11",
+            phone_number="9897927297"
+        )
+
+        label = Label.objects.create(
+            name="Sample Label Company",
+            founded_date="1989-03-12",
+            headquarters="USA"
+        )
+
+        number_of_genres = 2
+        for genre_id in range(number_of_genres):
+            Genre.objects.create(
+                title=f"Genre {genre_id}",
+                slug=f"genre-{genre_id}"
+            )
+        genres = Genre.objects.all()
+
+    def test_view_url_exists_at_desired_location(self):
+        response = self.client.get("/musics/genres/genre-1")
+        self.assertEqual(response.status_code, 200)
+
+    def test_url_accessible_by_name(self):
+        response = self.client.get(
+            reverse("genre-detail", kwargs={"slug": "genre-1"})
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_view_uses_correct_template(self):
+        response = self.client.get(
+            reverse("genre-detail", kwargs={"slug": "genre-1"})
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "music/genre_detail.html")
+
+    def test_view_displays_correct_movie(self):
+        response = self.client.get(
+            reverse("genre-detail", kwargs={"slug": "genre-1"})
+        )
+        self.assertContains(response, "Genre 1")
+
