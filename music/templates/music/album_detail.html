@@ -1,18 +1,93 @@
-{% extends 'base_generic.html' %} 
-
-{% block title %} {{album.name}} 
-{% endblock title %} 
-
-{% block content %}
+{% extends 'base_generic.html' %} {% block title %} {{album.name}} 
+{% endblock title %} {% block content %}
 
 <div class="row">
+  <div class="col-md-5 text-end">
+    <img
+      class="w-75 box-shadow-2 rounded-3"
+      src="{{album.cover_image.url}}"
+      alt=""
+    />
+  </div>
 
-    <div class="col-md-12">
+  <div class="col-md-7 px-5 mb-4">
+    <div class="mt-4">
+      <h1 class="mt-3 title-color fw-bold">{{album.name|title}}</h1>
+      <p class="mt-1">
+        Songs <span class="fw-bold">{{album.music_set.count}}</span>
+      </p>
 
-        {{album.name}}
+      <h4>Genres</h4>
 
+      {% for genre in album.genre.all %}
+      <div class="badge rounded-pill bg-dark">
+        <a
+          href="{% url 'genre-detail' genre.slug %}"
+          class="no-text-decoration text-white"
+          ><p class="mb-0 fs-6 px-2 py-1">{{genre.title|title}}</p></a
+        >
+      </div>
+      {% endfor %}
+
+
+      <h4 class="mt-4">Label</h4>
+
+      
+      <div class="badge rounded-pill bg-dark">
+        <a
+          href="{% url 'label-detail' album.label.slug %}"
+          class="no-text-decoration text-white"
+          ><p class="mb-0 fs-6 px-2 py-1">{{album.label.name|title}}</p></a
+        >
+      </div>
+
+      <hr />
+
+      <h4 class="mt-4">Songs</h4>
+
+      <div class="row">
+        {% for music in album.music_set.all %}
+
+        <div class="col-md-12 p-3">
+          <div class="d-flex align-items-center justify-content-start">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="22px"
+              viewBox="0 0 24 24"
+              width="22px"
+              fill="#000000"
+              class="fill-blue"
+            >
+              <path d="M0 0h24v24H0V0z" fill="none" />
+              <path
+                d="M12 3l.01 10.55c-.59-.34-1.27-.55-2-.55C7.79 13 6 14.79 6 17s1.79 4 4.01 4S14 19.21 14 17V7h4V3h-6zm-1.99 16c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"
+              />
+            </svg>
+            <a href="{% url 'music-detail' music.slug %}" class="no-text-decoration text-black">
+                <p class="mb-0 mx-1">
+                    <span class="fw-bold">{{music.name}}</span> | {{music.duration}}
+                </p>
+            </a>
+          </div>
+          <div class="d-flex align-items-center justify-content-start my-2">
+            {% for genre in music.genre.all %}
+            <div class="badge rounded-pill bg-primary">
+              <a
+                href="{% url 'genre-detail' genre.slug %}"
+                class="no-text-decoration text-white"
+                ><p class="mb-0 fs-7 px-2 py-1">{{genre.title|title}}</p></a
+              >
+            </div>
+            {% endfor %}
+          </div>
+
+          <hr>
+        </div>
+
+        {% endfor %}
+      </div>
     </div>
-
+  </div>
 </div>
 
 {% endblock content %}
