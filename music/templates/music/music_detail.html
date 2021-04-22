@@ -69,7 +69,8 @@
     
     {% for music in music.album.music_set.all|slice:"0:5" %}
         
-        <div class="col-md-2 d-flex p-3 card">
+        <div class="col-md-3 d-flex p-3 justify-content-center">
+            <div class="card p-3">
             <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24px"
@@ -86,6 +87,7 @@
             <h5 class="card-title mb-0 mt-2">{{music.name}}</h5>
             <p class="card-text text-black-50 mt-1">{{music.album.name}}</p>
             <a href="{% url 'music-detail' music.slug %}" class="btn btn-primary">Open Song</a>
+        </div>
       </div>
 
     {% endfor %}
@@ -106,7 +108,8 @@
     
     {% for music in genre.music_set.all|slice:"0:5" %}
         
-        <div class="col-md-2 d-flex p-3 card">
+        <div class="col-md-3 d-flex p-3 justify-content-center">
+            <div class="card p-3">
             <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24px"
@@ -123,6 +126,7 @@
             <h5 class="card-title mb-0 mt-2">{{music.name}}</h5>
             <p class="card-text text-black-50 mt-1">{{music.album.name}}</p>
             <a href="{% url 'music-detail' music.slug %}" class="btn btn-primary">Open Song</a>
+        </div>
       </div>
 
     {% endfor %}
