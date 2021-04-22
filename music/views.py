@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import generic
 
-from .models import Music, Album
+from .models import Music, Album, Genre
 
 
 class MusicListView(generic.ListView):
@@ -18,3 +18,7 @@ class AlbumListView(generic.ListView):
 
 class AlbumDetailView(generic.DetailView):
     model = Album
+
+
+class GenreListView(generic.ListView):
+    model = Genre

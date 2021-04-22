@@ -1,0 +1,22 @@
+{% extends 'base_generic.html' %} {% block title %} Genre {% endblock title %}
+{% block content %}
+
+<div class="row movies">
+  <div class="col-md-12">
+    <div class="inner-header">
+      <h1 class="mg-b-3">Genres</h1>
+    </div>
+  </div>
+
+  {% for genre in genre_list %}
+
+  <div class="col-md-4">{{genre.title}}</div>
+
+  {% empty %}
+
+  <p>No Genres found!</p>
+
+  {% endfor %}
+</div>
+
+{% endblock content %}
