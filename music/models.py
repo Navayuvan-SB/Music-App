@@ -15,6 +15,9 @@ class MusicDirector(models.Model):
     phone_number = models.CharField(max_length=13)
     slug = models.SlugField("URL param", default=None, null=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Genre(models.Model):
     title = models.CharField(max_length=100, verbose_name="Genre Name")
