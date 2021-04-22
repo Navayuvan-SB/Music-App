@@ -14,3 +14,7 @@ class MusicDetailView(generic.DetailView):
 
 class AlbumListView(generic.ListView):
     model = Album
+
+
+class AlbumDetailView(generic.DetailView):
+    model = Album
