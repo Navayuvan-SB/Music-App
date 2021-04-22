@@ -35,3 +35,7 @@ class LabelListView(generic.ListView):
 class LabelDetailView(generic.DetailView):
     model = Label
 
+
+class MusicDirectorListView(generic.ListView):
+    model = MusicDirector
+

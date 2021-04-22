@@ -10,5 +10,7 @@ urlpatterns = [
     path('genres/<slug:slug>', views.GenreDetailView.as_view(), name="genre-detail"),
     path('labels/', views.LabelListView.as_view(), name="labels"),
     path('labels/<slug:slug>', views.LabelDetailView.as_view(), name="label-detail"),
-   
+    path('music-directors/', views.MusicDirectorListView.as_view(),
+         name="music-directors"),
+    
 ]

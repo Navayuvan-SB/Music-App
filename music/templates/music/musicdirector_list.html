@@ -1,0 +1,31 @@
+{% extends 'base_generic.html' %} 
+
+{% block title %} Music Directors {% endblock title %}
+
+{% block content %}
+
+<div class="row movies">
+
+  <div class="col-md-12">
+    <div class="inner-header">
+      <h1 class="mg-b-3">Music Directors</h1>
+    </div>
+  </div>
+
+  {% for musicdirector in musicdirector_list %}
+  
+  <div class="col-md-4">
+
+    {{musicdirector.name}}
+
+  </div>
+  
+
+  {% empty %}
+
+  <p>No Music Directors found!</p>
+
+  {% endfor %}
+</div>
+
+{% endblock content %}
