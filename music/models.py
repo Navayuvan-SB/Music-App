@@ -65,3 +65,6 @@ class Music(models.Model):
     album = models.ForeignKey(Album, on_delete=models.SET_NULL, null=True)
 
     slug = models.SlugField("URL param")
+
+    def __str__(self):
+        return self.name
