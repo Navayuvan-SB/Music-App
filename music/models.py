@@ -48,3 +48,15 @@ class Album(models.Model):
     release_date = models.DateField()
 
     cover_image = models.ImageField(upload_to="music/images", null=True)
+
+
+class Music(models.Model):
+    name = models.CharField(max_length=200, verbose_name="Album Name")
+    duration = models.DurationField(verbose_name="Duration of the song")
+
+    music_director = models.ForeignKey(
+        MusicDirector, on_delete=models.SET_NULL, null=True)
+    genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True)
+    album = models.ForeignKey(Album, on_delete=models.SET_NULL, null=True)
+
+    slug = models.SlugField("URL param")
