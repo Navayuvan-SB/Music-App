@@ -49,6 +49,11 @@ class Album(models.Model):
 
     cover_image = models.ImageField(upload_to="music/images", null=True)
 
+    slug = models.SlugField("URL param", default=None, null=True)
+
+    def __str__(self):
+        return self.name
+
 
 class Music(models.Model):
     name = models.CharField(max_length=200, verbose_name="Album Name")
