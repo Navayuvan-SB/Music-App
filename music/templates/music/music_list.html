@@ -1,28 +1,37 @@
 {% extends 'base_generic.html' %} {% block title %} Musics {% endblock title %}
-
-
 {% block content %}
 
-<div class="row movies">
-
+<div class="row">
   <div class="col-md-12">
-    <div class="inner-header">
-      <h1 class="mg-b-3">Musics</h1>
+    <div class="inner-header mb-4">
+      <h1>Musics</h1>
     </div>
   </div>
 
   {% for music in music_list %}
-  
-  <div class="col-md-4">
 
-    {{music.name}}
-
+  <div class="col-md-2 d-flex p-3 card">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      height="24px"
+      viewBox="0 0 24 24"
+      width="24px"
+      fill="#d7d7d7"
+      class="card-img-top song-svg mx-auto my-3"
+    >
+      <path d="M0 0h24v24H0V0z" fill="none" />
+      <path
+        d="M7 18h2V6H7v12zm4 4h2V2h-2v20zm-8-8h2v-4H3v4zm12 4h2V6h-2v12zm4-8v4h2v-4h-2z"
+      />
+    </svg>
+    <h5 class="card-title mb-0 mt-2">{{music.name}}</h5>
+    <p class="card-text text-black-50 mt-1">{{music.album.name}}</p>
+    <a href="{% url 'music-detail' music.slug %}" class="btn btn-primary">Open Song</a>
   </div>
-  
 
   {% empty %}
 
-  <p>No Musics found!</p>
+  <p>No musics found!</p>
 
   {% endfor %}
 </div>
