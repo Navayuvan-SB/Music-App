@@ -56,7 +56,7 @@ class Album(models.Model):
 
 
 class Music(models.Model):
-    name = models.CharField(max_length=200, verbose_name="Album Name")
+    name = models.CharField(max_length=200, verbose_name="Song Name")
     duration = models.DurationField(verbose_name="Duration of the song")
 
     music_director = models.ForeignKey(
