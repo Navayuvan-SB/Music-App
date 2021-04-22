@@ -7,6 +7,9 @@ class Label(models.Model):
     headquarters = models.CharField(max_length=512, verbose_name="Location of Headquarters")
     slug = models.SlugField("URL param", default=None, null=True)
 
+    def __str__(self):
+        return self.name
+
 class MusicDirector(models.Model):
 
     name = models.CharField(max_length=200, verbose_name="Name of the music director")
