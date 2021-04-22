@@ -1,0 +1,30 @@
+{% extends 'base_generic.html' %} {% block title %} Albums {% endblock title %}
+
+
+{% block content %}
+
+<div class="row movies">
+
+  <div class="col-md-12">
+    <div class="inner-header">
+      <h1 class="mg-b-3">Albums</h1>
+    </div>
+  </div>
+
+  {% for album in album_list %}
+  
+  <div class="col-md-4">
+
+    {{album.name}}
+
+  </div>
+  
+
+  {% empty %}
+
+  <p>No Albums found!</p>
+
+  {% endfor %}
+</div>
+
+{% endblock content %}
